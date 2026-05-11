@@ -1,0 +1,80 @@
+{
+  "name": "@trilom/file-changes-action",
+  "version": "1.1.1",
+  "description": "Creates outputs variables of files modified, added, or deleted by a PR or Push.",
+  "main": "lib/main.js",
+  "scripts": {
+    "release": "yarn build && yarn run pack && yarn --prod",
+    "build": "yarn && tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "pack": "ncc build",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "clean": "rm -rf node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trilom/file-changes-action.git"
+  },
+  "keywords": [
+    "actions",
+    "action",
+    "github-action",
+    "github-actions",
+    "github",
+    "node",
+    "typescript",
+    "examples"
+  ],
+  "author": "Bryan Killian <me@trilom.org>",
+  "homepage": "https://github.com/trilom/file-changes-action#README",
+  "license": "MIT",
+  "release": {
+    "branches": [
+      "test/v1"
+    ],
+    "dryRun": false,
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json",
+            "yarn.lock"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/github": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@typescript-eslint/parser": "^2.8.0",
+    "@zeit/ncc": "^0.20.5",
+    "eslint": "^5.16.0",
+    "eslint-plugin-github": "^2.0.0",
+    "eslint-plugin-jest": "^22.21.0",
+    "jest": "^24.9.0",
+    "jest-circus": "^24.9.0",
+    "js-yaml": "^3.13.1",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.6.4"
+  }
+}
